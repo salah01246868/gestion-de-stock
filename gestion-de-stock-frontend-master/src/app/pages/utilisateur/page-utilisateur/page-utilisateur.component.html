@@ -1,0 +1,39 @@
+<div class="col">
+  <div class="row m-3">
+    <div class="col-md-8 p-0">
+      <h1>Liste des utilisateurs</h1>
+    </div>
+    <div class="col-md-4 text-right">
+      <app-boutton-action
+        (clickEvent)="nouvelUtilosateur()"
+      ></app-boutton-action>
+    </div>
+  </div>
+  
+  <!-- Alert for error message -->
+  <div class="alert alert-danger" *ngIf="errorMsg">
+    {{ errorMsg }}
+  </div>
+  
+  <!-- No users message -->
+  <div class="col m-3" *ngIf="utilisateurs.length === 0 && !errorMsg">
+    <div class="alert alert-warning">
+      Aucun utilisateur trouvé dans la base de données.
+    </div>
+  </div>
+  
+  <!-- User list -->
+  <div class="col m-3" *ngIf="utilisateurs.length > 0">
+    <div *ngFor="let utilisateur of utilisateurs">
+      <app-detail-utilisateur
+        [utilisateur]="utilisateur"
+      ></app-detail-utilisateur>
+    </div>
+  </div>
+  
+  <div class="row mb-3" *ngIf="utilisateurs.length > 0">
+    <div class="col-md-12 text-center">
+      <app-pagination></app-pagination>
+    </div>
+  </div>
+</div>
